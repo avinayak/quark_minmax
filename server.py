@@ -6,7 +6,8 @@ import numpy as np
 import time
 import rle
 from atom import Atom
-import ai
+import minimax
+import os
 from waitress import serve
 
 app = Flask(__name__, static_folder='web', root_path='.')
@@ -32,7 +33,7 @@ def move():
         return jsonify({'x': int(action.y), 'y': int(action.x)})
     print(board)
 
-    val = ai.minimax({"board": board, 'move': []}, 3, -1e100, 1e100, True)
+    val = minimax.minimax({"board": board, 'move': []}, 3, -1e100, 1e100, True)
     print(val)
     y, x = val['move'][0]
     end_time = time.time()
@@ -43,4 +44,5 @@ def move():
 
 if __name__ == '__main__':
     # app.run(host='0.0.0.0', port='3000')
-    serve(app, host='0.0.0.0', port=8080)
+    port = int(os.environ.get("PORT", 5000))
+    serve(app, host='0.0.0.0', port=port)
