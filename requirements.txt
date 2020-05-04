@@ -1,3 +1,4 @@
 flask
 numba
 flask_cors
+waitress

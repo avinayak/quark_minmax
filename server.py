@@ -7,6 +7,7 @@ import time
 import rle
 from atom import Atom
 import ai
+from waitress import serve
 
 app = Flask(__name__, static_folder='web', root_path='.')
 CORS(app)
@@ -41,4 +42,5 @@ def move():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='3000')
+    # app.run(host='0.0.0.0', port='3000')
+    serve(app, host='0.0.0.0', port=8080)
